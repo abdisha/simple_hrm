@@ -26,10 +26,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 /**
  * LeaveTakenController
  */
-@CrossOrigin(origins = "http://localhost:4200")
+
 @RestController
 @RequestMapping("/leaveTaken")
 @Api(value = "/LeaveTaken", description = "manage employees leavetaken")
+@CrossOrigin(origins="*")
+
 public class LeaveTakenController {
 
     @Autowired

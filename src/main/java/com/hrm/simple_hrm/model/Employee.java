@@ -3,6 +3,7 @@ package com.hrm.simple_hrm.model;
 import java.util.List;
 import java.util.Objects;
 
+import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,6 +18,7 @@ public class Employee {
     private String fullName;
     private String sex;
     private int age;
+    private Binary profileImage;
     private boolean status;
     private String phone;
     private String email;
@@ -24,23 +26,26 @@ public class Employee {
     private String birthDate;
     private String typOfEmployement;
     private String dateOfEmployement;
-    private Position position;
+    private List<String> positionId;
     private List<Education> education;
     private List<Exprience> exprience;
-    private Departement departement;
-    private List<DisplenaryMeasure> displenaryMeasures;
+    private List<String>  departementId;
+    private List<DisplenaryMeasure> discipelnaryMeasure;
     private double basicSalary;
     private List<LeaveTaken> LeaveTaken;
+
+   
 
     public Employee() {
     }
 
-    public Employee(String id, String employeeId, String fullName, String sex, int age, boolean status, String phone, String email, String address, String birthDate, String typOfEmployement, String dateOfEmployement, Position position, List<Education> education, List<Exprience> exprience, Departement departement, List<DisplenaryMeasure> displenaryMeasures, double basicSalary, List<LeaveTaken> LeaveTaken) {
+    public Employee(String id, String employeeId, String fullName, String sex, int age, Binary profileImage, boolean status, String phone, String email, String address, String birthDate, String typOfEmployement, String dateOfEmployement, List<String> positionId, List<Education> education, List<Exprience> exprience, List<String> departementId, List<DisplenaryMeasure> discipelnaryMeasure, double basicSalary, List<LeaveTaken> LeaveTaken) {
         this.id = id;
         this.employeeId = employeeId;
         this.fullName = fullName;
         this.sex = sex;
         this.age = age;
+        this.profileImage = profileImage;
         this.status = status;
         this.phone = phone;
         this.email = email;
@@ -48,11 +53,11 @@ public class Employee {
         this.birthDate = birthDate;
         this.typOfEmployement = typOfEmployement;
         this.dateOfEmployement = dateOfEmployement;
-        this.position = position;
+        this.positionId = positionId;
         this.education = education;
         this.exprience = exprience;
-        this.departement = departement;
-        this.displenaryMeasures = displenaryMeasures;
+        this.departementId = departementId;
+        this.discipelnaryMeasure = discipelnaryMeasure;
         this.basicSalary = basicSalary;
         this.LeaveTaken = LeaveTaken;
     }
@@ -95,6 +100,14 @@ public class Employee {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public Binary getProfileImage() {
+        return this.profileImage;
+    }
+
+    public void setProfileImage(Binary profileImage) {
+        this.profileImage = profileImage;
     }
 
     public boolean isStatus() {
@@ -157,12 +170,12 @@ public class Employee {
         this.dateOfEmployement = dateOfEmployement;
     }
 
-    public Position getPosition() {
-        return this.position;
+    public List<String> getPositionId() {
+        return this.positionId;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
+    public void setPositionId(List<String> positionId) {
+        this.positionId = positionId;
     }
 
     public List<Education> getEducation() {
@@ -181,20 +194,20 @@ public class Employee {
         this.exprience = exprience;
     }
 
-    public Departement getDepartement() {
-        return this.departement;
+    public List<String> getDepartementId() {
+        return this.departementId;
     }
 
-    public void setDepartement(Departement departement) {
-        this.departement = departement;
+    public void setDepartementId(List<String> departementId) {
+        this.departementId = departementId;
     }
 
-    public List<DisplenaryMeasure> getDisplenaryMeasures() {
-        return this.displenaryMeasures;
+    public List<DisplenaryMeasure> getDiscipelnaryMeasure() {
+        return this.discipelnaryMeasure;
     }
 
-    public void setDisplenaryMeasures(List<DisplenaryMeasure> displenaryMeasures) {
-        this.displenaryMeasures = displenaryMeasures;
+    public void setDiscipelnaryMeasure(List<DisplenaryMeasure> discipelnaryMeasure) {
+        this.discipelnaryMeasure = discipelnaryMeasure;
     }
 
     public double getBasicSalary() {
@@ -238,6 +251,11 @@ public class Employee {
         return this;
     }
 
+    public Employee profileImage(Binary profileImage) {
+        this.profileImage = profileImage;
+        return this;
+    }
+
     public Employee status(boolean status) {
         this.status = status;
         return this;
@@ -273,8 +291,8 @@ public class Employee {
         return this;
     }
 
-    public Employee position(Position position) {
-        this.position = position;
+    public Employee positionId(List<String> positionId) {
+        this.positionId = positionId;
         return this;
     }
 
@@ -288,13 +306,13 @@ public class Employee {
         return this;
     }
 
-    public Employee departement(Departement departement) {
-        this.departement = departement;
+    public Employee departementId(List<String> departementId) {
+        this.departementId = departementId;
         return this;
     }
 
-    public Employee displenaryMeasures(List<DisplenaryMeasure> displenaryMeasures) {
-        this.displenaryMeasures = displenaryMeasures;
+    public Employee discipelnaryMeasure(List<DisplenaryMeasure> discipelnaryMeasure) {
+        this.discipelnaryMeasure = discipelnaryMeasure;
         return this;
     }
 
@@ -316,12 +334,12 @@ public class Employee {
             return false;
         }
         Employee employee = (Employee) o;
-        return Objects.equals(id, employee.id) && Objects.equals(employeeId, employee.employeeId) && Objects.equals(fullName, employee.fullName) && Objects.equals(sex, employee.sex) && age == employee.age && status == employee.status && Objects.equals(phone, employee.phone) && Objects.equals(email, employee.email) && Objects.equals(address, employee.address) && Objects.equals(birthDate, employee.birthDate) && Objects.equals(typOfEmployement, employee.typOfEmployement) && Objects.equals(dateOfEmployement, employee.dateOfEmployement) && Objects.equals(position, employee.position) && Objects.equals(education, employee.education) && Objects.equals(exprience, employee.exprience) && Objects.equals(departement, employee.departement) && Objects.equals(displenaryMeasures, employee.displenaryMeasures) && basicSalary == employee.basicSalary && Objects.equals(LeaveTaken, employee.LeaveTaken);
+        return Objects.equals(id, employee.id) && Objects.equals(employeeId, employee.employeeId) && Objects.equals(fullName, employee.fullName) && Objects.equals(sex, employee.sex) && age == employee.age && Objects.equals(profileImage, employee.profileImage) && status == employee.status && Objects.equals(phone, employee.phone) && Objects.equals(email, employee.email) && Objects.equals(address, employee.address) && Objects.equals(birthDate, employee.birthDate) && Objects.equals(typOfEmployement, employee.typOfEmployement) && Objects.equals(dateOfEmployement, employee.dateOfEmployement) && Objects.equals(positionId, employee.positionId) && Objects.equals(education, employee.education) && Objects.equals(exprience, employee.exprience) && Objects.equals(departementId, employee.departementId) && Objects.equals(discipelnaryMeasure, employee.discipelnaryMeasure) && basicSalary == employee.basicSalary && Objects.equals(LeaveTaken, employee.LeaveTaken);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, employeeId, fullName, sex, age, status, phone, email, address, birthDate, typOfEmployement, dateOfEmployement, position, education, exprience, departement, displenaryMeasures, basicSalary, LeaveTaken);
+        return Objects.hash(id, employeeId, fullName, sex, age, profileImage, status, phone, email, address, birthDate, typOfEmployement, dateOfEmployement, positionId, education, exprience, departementId, discipelnaryMeasure, basicSalary, LeaveTaken);
     }
 
     @Override
@@ -332,6 +350,7 @@ public class Employee {
             ", fullName='" + getFullName() + "'" +
             ", sex='" + getSex() + "'" +
             ", age='" + getAge() + "'" +
+            ", profileImage='" + getProfileImage() + "'" +
             ", status='" + isStatus() + "'" +
             ", phone='" + getPhone() + "'" +
             ", email='" + getEmail() + "'" +
@@ -339,18 +358,16 @@ public class Employee {
             ", birthDate='" + getBirthDate() + "'" +
             ", typOfEmployement='" + getTypOfEmployement() + "'" +
             ", dateOfEmployement='" + getDateOfEmployement() + "'" +
-            ", position='" + getPosition() + "'" +
+            ", positionId='" + getPositionId() + "'" +
             ", education='" + getEducation() + "'" +
             ", exprience='" + getExprience() + "'" +
-            ", departement='" + getDepartement() + "'" +
-            ", displenaryMeasures='" + getDisplenaryMeasures() + "'" +
+            ", departementId='" + getDepartementId() + "'" +
+            ", discipelnaryMeasure='" + getDiscipelnaryMeasure() + "'" +
             ", basicSalary='" + getBasicSalary() + "'" +
             ", LeaveTaken='" + getLeaveTaken() + "'" +
             "}";
     }
 
-
-
-
+   
    
 }

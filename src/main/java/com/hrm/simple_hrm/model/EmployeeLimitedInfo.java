@@ -2,6 +2,7 @@ package com.hrm.simple_hrm.model;
 
 import java.util.Objects;
 
+import org.bson.types.Binary;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -10,32 +11,27 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class EmployeeLimitedInfo {
     private String id;
+    private Binary profileImage;
     private String employeeId;
     private String fullName;
     private String sex;
     private int age;
     private boolean status;
-    private String phone;
-    private String email;
-    private String address;
-    private String birthDate;
+
 
     
 
     public EmployeeLimitedInfo() {
     }
 
-    public EmployeeLimitedInfo(String id, String employeeId, String fullName, String sex, int age, boolean status, String phone, String email, String address, String birthDate) {
+    public EmployeeLimitedInfo(String id, Binary binary, String employeeId, String fullName, String sex, int age, boolean status) {
         this.id = id;
+        this.profileImage = binary;
         this.employeeId = employeeId;
         this.fullName = fullName;
         this.sex = sex;
         this.age = age;
         this.status = status;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.birthDate = birthDate;
     }
 
     public String getId() {
@@ -44,6 +40,14 @@ public class EmployeeLimitedInfo {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Binary getProfileImage() {
+        return this.profileImage;
+    }
+
+    public void setProfileImage(Binary profileImage) {
+        this.profileImage = profileImage;
     }
 
     public String getEmployeeId() {
@@ -90,40 +94,13 @@ public class EmployeeLimitedInfo {
         this.status = status;
     }
 
-    public String getPhone() {
-        return this.phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getBirthDate() {
-        return this.birthDate;
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
-    }
-
     public EmployeeLimitedInfo id(String id) {
         this.id = id;
+        return this;
+    }
+
+    public EmployeeLimitedInfo profileImage(Binary profileImage) {
+        this.profileImage = profileImage;
         return this;
     }
 
@@ -152,26 +129,6 @@ public class EmployeeLimitedInfo {
         return this;
     }
 
-    public EmployeeLimitedInfo phone(String phone) {
-        this.phone = phone;
-        return this;
-    }
-
-    public EmployeeLimitedInfo email(String email) {
-        this.email = email;
-        return this;
-    }
-
-    public EmployeeLimitedInfo address(String address) {
-        this.address = address;
-        return this;
-    }
-
-    public EmployeeLimitedInfo birthDate(String birthDate) {
-        this.birthDate = birthDate;
-        return this;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -180,27 +137,26 @@ public class EmployeeLimitedInfo {
             return false;
         }
         EmployeeLimitedInfo employeeLimitedInfo = (EmployeeLimitedInfo) o;
-        return Objects.equals(id, employeeLimitedInfo.id) && Objects.equals(employeeId, employeeLimitedInfo.employeeId) && Objects.equals(fullName, employeeLimitedInfo.fullName) && Objects.equals(sex, employeeLimitedInfo.sex) && age == employeeLimitedInfo.age && status == employeeLimitedInfo.status && Objects.equals(phone, employeeLimitedInfo.phone) && Objects.equals(email, employeeLimitedInfo.email) && Objects.equals(address, employeeLimitedInfo.address) && Objects.equals(birthDate, employeeLimitedInfo.birthDate);
+        return Objects.equals(id, employeeLimitedInfo.id) && Objects.equals(profileImage, employeeLimitedInfo.profileImage) && Objects.equals(employeeId, employeeLimitedInfo.employeeId) && Objects.equals(fullName, employeeLimitedInfo.fullName) && Objects.equals(sex, employeeLimitedInfo.sex) && age == employeeLimitedInfo.age && status == employeeLimitedInfo.status;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, employeeId, fullName, sex, age, status, phone, email, address, birthDate);
+        return Objects.hash(id, profileImage, employeeId, fullName, sex, age, status);
     }
 
     @Override
     public String toString() {
         return "{" +
             " id='" + getId() + "'" +
+            ", profileImage='" + getProfileImage() + "'" +
             ", employeeId='" + getEmployeeId() + "'" +
             ", fullName='" + getFullName() + "'" +
             ", sex='" + getSex() + "'" +
             ", age='" + getAge() + "'" +
             ", status='" + isStatus() + "'" +
-            ", phone='" + getPhone() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", address='" + getAddress() + "'" +
-            ", birthDate='" + getBirthDate() + "'" +
             "}";
     }
+    
+
 }

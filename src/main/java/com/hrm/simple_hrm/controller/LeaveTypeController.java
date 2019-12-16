@@ -26,10 +26,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 /**
  * LeaveTypeController
  */
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/leaveType")
 @Api(value = "LeaveType", description = "manage leave types")
+@CrossOrigin(origins="*")
+
 public class LeaveTypeController {
 
     @Autowired

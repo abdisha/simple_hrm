@@ -13,6 +13,12 @@ public class Company {
     private String id;
     private String companyName;
     private String  aboutComapny;
+    private String webSite;
+    private String address;
+    private String phone;
+    private String taxNumber;
+    private String tinNumber; 
+    private String email;
 
     public Company() {
     }
@@ -167,8 +173,7 @@ public class Company {
         return "{" +
             " id='" + getId() + "'" +
             ", companyName='" + getCompanyName() + "'" +
-            ", aboutComapny='" + getAboutComapny() + 
-            "'" +
+            ", aboutComapny='" + getAboutComapny() + "'" +
             ", webSite='" + getWebSite() + "'" +
             ", address='" + getAddress() + "'" +
             ", phone='" + getPhone() + "'" +
@@ -177,12 +182,6 @@ public class Company {
             ", email='" + getEmail() + "'" +
             "}";
     }
-    private String webSite;
-    private String address;
-    private String phone;
-    private String taxNumber;
-    private String tinNumber; 
-    private String email;
 
 
 }

@@ -27,7 +27,8 @@ import io.swagger.annotations.ApiOperation;
 /**
  * DepartementController
  */
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins="*")
+
 @RestController
 @RequestMapping("/departement")
 @Api(value = "Departement",description = "Operation to mantains departemants")

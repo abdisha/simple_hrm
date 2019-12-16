@@ -1,15 +1,20 @@
 package com.hrm.simple_hrm.Service;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import com.hrm.simple_hrm.dao.EmployeeLimitedInfoRepository;
 import com.hrm.simple_hrm.dao.EmployeeRepository;
 import com.hrm.simple_hrm.model.Employee;
 import com.hrm.simple_hrm.model.EmployeeLimitedInfo;
 
+import org.bson.BsonBinarySubType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * EmployeeService
@@ -20,39 +25,80 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository _employeeRepository;
 
-    @Autowired
-    private EmployeeLimitedInfoRepository _employeLmInfoRepository;
+    private MongoTemplate mongoTemplate;
 
-    public String create(Employee employee){
-       _employeeRepository.insert(employee);
-       return employee.toString();
+    public EmployeeService(MongoTemplate mongoTemplate) {
+        this.mongoTemplate = mongoTemplate;
     }
-    //get all limted info of employees
+
+    public String create(Employee employee) {
+        
+    
+
+        _employeeRepository.insert(employee);
+        return employee.toString();
+    }
+    // get all limted info of employees
 
     public List<EmployeeLimitedInfo> getAllEmployeeLimitedInfo() {
-        return _employeLmInfoRepository.findAll();
+        List<EmployeeLimitedInfo> eLimitedInfos = new ArrayList<EmployeeLimitedInfo>();
+        _employeeRepository.findAll().forEach((x) -> {
+            eLimitedInfos.add(new EmployeeLimitedInfo(x.getId(),x.getProfileImage(), x.getEmployeeId(),
+                    x.getFullName(), x.getSex(), x.getAge(), x.getStatus()));
+        });
+        return eLimitedInfos;
     }
-    //get all employees
-    public List<Employee> getAll(){
+
+    public byte[]  getImage(String employeeId) {
+        Query query =new Query(Criteria.where("employeeId").is(employeeId));
+        query.fields().include("profileImage");
+       Employee employee= mongoTemplate.findOne(query, Employee.class);
+        return employee.getProfileImage().getData();
+    }
+    // get all employees
+    public List<Employee> getAll() {
+        
         return _employeeRepository.findAll();
     }
-    //delete employees
+
+    // delete employees
     public void delete(String id) {
-         _employeeRepository.deleteById(id);
+        _employeeRepository.deleteById(id);
     }
-    public void deleteAll(){
+
+    public void deleteAll() {
         _employeeRepository.deleteAll();
     }
-    //update
-    public Optional<Employee> update(String id, Employee employee) 
-    {
+
+    // update
+    public Employee update(String id, Employee employee) {
         employee.setId(id);
         _employeeRepository.save(employee);
-        return _employeeRepository.findById(id);
+        return _employeeRepository.findByemployeeId(id);
     }
-    //find
-    public Optional<Employee> findById(String id) {
-        return _employeeRepository.findById(id);
+
+    // find
+    public Employee findById(String id) {
+        return _employeeRepository.findByemployeeId(id);
     }
+
+    public boolean uploadPofile(String id, MultipartFile file) {
+
+            Query query = new Query();
+            query.addCriteria(Criteria.where("employeeId").is(id));
+
+            Employee employee = mongoTemplate.findOne(query, Employee.class);
+            try {
+                employee.setProfileImage(new org.bson.types.Binary(BsonBinarySubType.BINARY, file.getBytes()));
+                mongoTemplate.save(employee);
+                return true;
+            } catch (IOException e) {
+               
+                e.printStackTrace();
+               
+            }
+            
+         return false;
+	}
 
 }

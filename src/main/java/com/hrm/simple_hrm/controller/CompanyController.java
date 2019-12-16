@@ -7,6 +7,7 @@ import com.hrm.simple_hrm.Service.CompanyService;
 import com.hrm.simple_hrm.model.Company;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,8 @@ import io.swagger.annotations.ApiOperation;
 @RestController()
 @RequestMapping("/Company")
 @Api(value = "/Company",description = "Maintain comapny information")
+@CrossOrigin(origins="*")
+
 public class CompanyController {
 
     @Autowired

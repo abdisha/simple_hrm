@@ -11,7 +11,7 @@ public class Exprience {
 
     @Id
     private String id;
-    private String jopPosition;
+    private String jobPosition;
     private String companyName;
     private String fromDate;
     private String toDate;
@@ -20,9 +20,9 @@ public class Exprience {
     public Exprience() {
     }
 
-    public Exprience(String id, String jopPosition, String companyName, String fromDate, String toDate, String rangeTime) {
+    public Exprience(String id, String jobPosition, String companyName, String fromDate, String toDate, String rangeTime) {
         this.id = id;
-        this.jopPosition = jopPosition;
+        this.jobPosition = jobPosition;
         this.companyName = companyName;
         this.fromDate = fromDate;
         this.toDate = toDate;
@@ -37,12 +37,12 @@ public class Exprience {
         this.id = id;
     }
 
-    public String getJopPosition() {
-        return this.jopPosition;
+    public String getJobPosition() {
+        return this.jobPosition;
     }
 
-    public void setJopPosition(String jopPosition) {
-        this.jopPosition = jopPosition;
+    public void setJobPosition(String jobPosition) {
+        this.jobPosition = jobPosition;
     }
 
     public String getCompanyName() {
@@ -82,8 +82,8 @@ public class Exprience {
         return this;
     }
 
-    public Exprience jopPosition(String jopPosition) {
-        this.jopPosition = jopPosition;
+    public Exprience jobPosition(String jobPosition) {
+        this.jobPosition = jobPosition;
         return this;
     }
 
@@ -115,19 +115,19 @@ public class Exprience {
             return false;
         }
         Exprience exprience = (Exprience) o;
-        return Objects.equals(id, exprience.id) && Objects.equals(jopPosition, exprience.jopPosition) && Objects.equals(companyName, exprience.companyName) && Objects.equals(fromDate, exprience.fromDate) && Objects.equals(toDate, exprience.toDate) && Objects.equals(rangeTime, exprience.rangeTime);
+        return Objects.equals(id, exprience.id) && Objects.equals(jobPosition, exprience.jobPosition) && Objects.equals(companyName, exprience.companyName) && Objects.equals(fromDate, exprience.fromDate) && Objects.equals(toDate, exprience.toDate) && Objects.equals(rangeTime, exprience.rangeTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, jopPosition, companyName, fromDate, toDate, rangeTime);
+        return Objects.hash(id, jobPosition, companyName, fromDate, toDate, rangeTime);
     }
 
     @Override
     public String toString() {
         return "{" +
             " id='" + getId() + "'" +
-            ", jopPosition='" + getJopPosition() + "'" +
+            ", jobPosition='" + getJobPosition() + "'" +
             ", companyName='" + getCompanyName() + "'" +
             ", fromDate='" + getFromDate() + "'" +
             ", toDate='" + getToDate() + "'" +
